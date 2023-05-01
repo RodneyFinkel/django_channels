@@ -14,7 +14,7 @@ class ChatConsumer(WebsocketConsumer):
     def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = f'chat_{self.room_name}'
-        self.room = Room.object.get(name=self.room_name)
+        self.room = Room.objects.get(name=self.room_name)
         
         # connection has to be accepted
         self.accept()
