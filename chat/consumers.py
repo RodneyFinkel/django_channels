@@ -49,7 +49,7 @@ class ChatConsumer(WebsocketConsumer):
                 'message': message,
             }
         )
-        Message.object.create(user=self.user, room=self.room, content=message)
+        Message.objects.create(user=self.user, room=self.room, content=message)
         
     def chat_message(self, event):
         self.send(text_data=json.dumps(event))
