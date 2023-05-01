@@ -39,7 +39,7 @@ class ChatConsumer(WebsocketConsumer):
                 self.room_group_name,
                 {
                 'type':  'user_join',
-                'user': self.user.user_name,
+                'user': self.user.username,
                 }
             )
             self.room.online.add(self.user)
