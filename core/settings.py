@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,11 +24,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-f=4sf3^m3sc5oquy^3urg12#1=i7(#(ke+3dubc6abt=^t3=06'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+# DEBUG = True
+# Dockerize procedure test
+DEBUG = os.environ.get("DEBUG", True)  
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0']
-
-
+# trying this for dockerizing
+if os.environ.get("ALLOWED_HOSTS") is not None:
+    try:
+        ALLOWED_HOSTS += os.environ.get("ALLOWED_HOSTS").split(",")
+    except Exception as e:
+        print("Cant set ALLOWED_HOSTS, using default instead")
+# dockerizing test
 # Application definition
 
 INSTALLED_APPS = [
